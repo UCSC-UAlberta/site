@@ -295,6 +295,8 @@ section { padding: 72px 0; border-top: 1px solid var(--border); }
   color: var(--text);
   margin-bottom: 4px;
 }
+.team-avatar { overflow: hidden; }
+.team-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .team-role { align-self: flex-start; }
 .team-bio { flex: 1; }
 .team-links { display: flex; gap: 16px; }
