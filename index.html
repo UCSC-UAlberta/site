@@ -9,9 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/png/mark-default-32.png">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/png/mark-default-64.png">
   <link rel="apple-touch-icon" href="assets/png/mark-default-256.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,12 +17,13 @@
   <nav id="navbar">
     <div class="nav-inner">
       <a href="index.html" class="nav-brand">
-        <img src="assets/png/lockup-horizontal-4x.png" width="229" height="48" alt="UCSC">
+        <img src="assets/png/lockup-horizontal-2x.png" width="229" height="48" alt="UCSC">
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="team.html">Team</a></li>
-        <li><a href="#join">Join</a></li>
+        <li><a href="#events">Events</a></li>
+        <li class="nav-cta"><a href="https://discord.gg/hh8DezYDkE" class="btn btn-primary">Join the Discord</a></li>
       </ul>
       <button class="hamburger" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
@@ -33,13 +32,20 @@
   </nav>
 
   <header class="hero">
+    <!-- Brand hexagon outline, geometry and colours copied from branding/Post Backgrounds -->
+    <svg class="hero-hex" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+      <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+        <polyline points="106.8,33 60,6 13.2,33 13.2,87 60,114 106.8,87" stroke="#262626" stroke-width="1.4"/>
+        <polygon points="60,26 30.6,43 30.6,77 60,94 89.4,77 89.4,43" stroke="#1F2A0D" stroke-width="1.4"/>
+      </g>
+    </svg>
     <div class="wrap">
       <div class="hero-copy">
         <span class="eyebrow">At the University of Alberta</span>
-        <h1 class="display">Learn security<br> by doing it.</h1>
+        <h1 class="display">Learn security <span class="accent">by doing it.</span></h1>
         <p class="lede">UCSC is a student club for anyone curious about cyber security. We run CTFs, hands-on workshops and talks. No experience needed.</p>
         <div class="btn-group">
-          <a href="#join" class="btn btn-primary">Get involved</a>
+          <a href="https://discord.gg/hh8DezYDkE" class="btn btn-primary">Join the Discord</a>
           <a href="#about" class="btn btn-outline">Learn more</a>
         </div>
       </div>
@@ -48,12 +54,20 @@
 
   <section id="about" class="reveal">
     <div class="wrap">
-      <div class="section-head split">
-        <div class="section-title">
-          <span class="eyebrow">About</span>
-          <h2 class="h1">Who we are</h2>
+      <div class="panel">
+        <div class="panel-title">
+          <span class="eyebrow">Who we are</span>
+          <h2 class="h1">A cyber security community on campus.</h2>
         </div>
-        <p class="lead">The Undergraduate Cyber Security Club (UCSC) is the official undergraduate cyber security organization at the University of Alberta. Run by a student executive team, UCSC is building a cyber security community on campus. Our mission is to raise awareness of cyber security, bring more students into the field, and promote Women in Cybersecurity.</p>
+        <div class="panel-body">
+          <p class="lead">The Undergraduate Cyber Security Club (UCSC) is the official undergraduate cyber security organization at the University of Alberta. Run by a student executive team, UCSC is building a cyber security community on campus. Our mission is to raise awareness of cyber security, bring more students into the field, and promote Women in Cybersecurity.</p>
+          <ul class="pill-list">
+            <li class="pill">CTFs</li>
+            <li class="pill">Workshops</li>
+            <li class="pill">Talks</li>
+            <li class="pill">Women in Cybersecurity</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -65,24 +79,24 @@
         <h2 class="h1">What we do</h2>
       </div>
       <div class="cards">
-        <div class="card">
+        <a href="#join" class="card">
           <span class="card-num">01</span>
           <h3 class="h2">CTF competitions</h3>
           <p>Capture the flag events where we compete as a team. Categories include web exploitation, cryptography, reverse engineering and more.</p>
-          <a href="#join" class="card-link">Get involved</a>
-        </div>
-        <div class="card">
+          <span class="card-link">Get involved</span>
+        </a>
+        <a href="#events" class="card">
           <span class="card-num">02</span>
           <h3 class="h2">Workshops and labs</h3>
           <p>Hands-on sessions covering offensive and defensive techniques in a safe environment, from penetration testing to malware analysis.</p>
-          <a href="#events" class="card-link">Workshops</a>
-        </div>
-        <div class="card">
+          <span class="card-link">Workshops</span>
+        </a>
+        <a href="team.html" class="card">
           <span class="card-num">03</span>
           <h3 class="h2">The team</h3>
           <p>The executives who organize events, build challenges and run the club. We're always looking for people to help.</p>
-          <a href="team.html" class="card-link">Meet the team</a>
-        </div>
+          <span class="card-link">Meet the team</span>
+        </a>
       </div>
     </div>
   </section>
@@ -103,7 +117,7 @@
         The calendar must be public: "Access permissions" → "Make available to public".
       -->
       <div class="calendar" id="calendar" data-calendar-id="chads@ualberta.ca" data-timezone="America/Edmonton">
-        <iframe id="calendarFrame" title="UCSC events calendar" loading="lazy" hidden></iframe>
+        <iframe id="calendarFrame" title="UCSC events calendar" hidden></iframe>
         <p class="calendar-empty" id="calendarEmpty" hidden>The events calendar isn't connected yet.</p>
       </div>
     </div>
@@ -119,6 +133,7 @@
         </div>
         <div class="btn-group">
           <a href="https://discord.gg/hh8DezYDkE" class="btn btn-primary">Join the Discord</a>
+          <a href="team.html" class="btn btn-outline">Meet the team</a>
         </div>
       </div>
     </div>
@@ -126,15 +141,30 @@
 
   <footer>
     <div class="wrap footer-inner">
-      <a href="index.html" class="footer-brand">
-        <img src="assets/png/mark-default-64.png" width="32" height="32" alt="UCSC">
-      </a>
-      <div class="social-links">
-        <a href="https://discord.gg/hh8DezYDkE">Discord</a>
-        <a href="mailto:ucsc@ualberta.ca">Email</a>
-        <a href="https://www.instagram.com/ucsc_ualberta/">Instagram</a>
-        <a href="https://www.linkedin.com/company/ucsc-ualberta">LinkedIn</a>
-        <a href="https://github.com/UCSC-UAlberta">GitHub</a>
+      <div class="footer-about">
+        <a href="index.html" class="footer-brand">
+          <img src="assets/png/lockup-horizontal-2x.png" width="229" height="48" alt="UCSC">
+        </a>
+        <p>CTFs, workshops and talks at the University of Alberta. Run by students, open to everyone.</p>
+      </div>
+      <div class="footer-col">
+        <span class="label">Pages</span>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="index.html#events">Events</a></li>
+          <li><a href="index.html#join">Join</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <span class="label">Connect</span>
+        <ul>
+          <li><a href="https://discord.gg/hh8DezYDkE">Discord</a></li>
+          <li><a href="mailto:ucsc@ualberta.ca">Email</a></li>
+          <li><a href="https://www.instagram.com/ucsc_ualberta/">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/company/ucsc-ualberta">LinkedIn</a></li>
+          <li><a href="https://github.com/UCSC-UAlberta">GitHub</a></li>
+        </ul>
       </div>
       <p class="copyright">© 2026 Undergraduate Cyber Security Club at the University of Alberta.</p>
     </div>

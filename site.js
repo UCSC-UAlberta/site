@@ -46,8 +46,20 @@ if (cal) {
       });
       frame.src = 'https://calendar.google.com/calendar/embed?' + p.toString();
     };
-    setSrc();
-    narrow.addEventListener('change', setSrc);
+    // The embed pulls in ~500 KB of Google scripts, so only load it once the
+    // visitor scrolls near the events section.
+    const load = () => {
+      setSrc();
+      narrow.addEventListener('change', setSrc);
+    };
     frame.hidden = false;
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        if (entries.some(e => e.isIntersecting)) { io.disconnect(); load(); }
+      }, { rootMargin: '600px 0px' });
+      io.observe(cal);
+    } else {
+      load();
+    }
   }
 }
